@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi persona favorita - Navidad 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Librería para animaciones al hacer scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        :root {
+            --primary-red: #be123c;
+            --soft-pink: #fff1f2;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--soft-pink);
+            overflow-x: hidden;
+        }
+        .font-romance { font-family: 'Dancing Script', cursive; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        /* Nieve mejorada */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            z-index: 999;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Estilo Polaroid */
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: all 0.5s ease;
+        }
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 20;
+        }
+
+        /* Botón de música flotante */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #music-control:hover { transform: scale(1.1); }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Degradado animado para la hero section */
+        .hero-gradient {
+            background: linear-gradient(-45deg, #be123c, #9f1239, #4c0519, #881337);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Contador estilizado */
+        .timer-number {
+            background: linear-gradient(to bottom, #be123c, #9f1239);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Efecto de Video Adaptable con Texto */
+        .video-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 2rem;
+            /* Eliminamos la altura fija para que dependa del aspect-ratio */
+        }
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.35) saturate(0.7); /* Oscurecemos un poco más para resaltar el texto */
+        }
+        .video-overlay-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            z-index: 10;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Control de Música -->
+    <div id="music-control" class="bg-white p-3 rounded-full shadow-2xl flex items-center justify-center border-2 border-red-500">
+        <span id="music-icon" class="text-2xl">🎵</span>
+        <audio id="bg-music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Sección Hero -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden hero-gradient">
+        <div class="relative z-10 text-center px-6" data-aos="zoom-in" data-aos-duration="2000">
+            <span class="text-white tracking-widest uppercase text-sm mb-4 block">Navidad 2025</span>
+            <h1 class="text-white text-6xl md:text-8xl font-romance mb-6">Nuestra Historia</h1>
+            <p class="text-red-100 text-xl md:text-2xl font-light italic max-w-2xl mx-auto">
+                "Desde aquel 9 de mayo de 2025, mi mundo es más brillante."
+            </p>
+            <div class="mt-12">
+                <a href="#viaje" class="bg-white text-red-700 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-red-50 transition-all uppercase tracking-wider text-sm">
+                    Ver mi sorpresa
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contador de Tiempo (Desde el 9 de Mayo de 2025) -->
+    <section class="py-16 bg-white shadow-inner">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h3 class="text-gray-400 uppercase tracking-widest text-xs mb-6 font-bold">Llevamos juntos:</h3>
+            <div class="flex justify-center space-x-2 md:space-x-8 text-red-600 font-serif" id="timer">
+                <div class="bg-red-50 p-4 rounded-xl min-w-[75px] md:min-w-[120px] shadow-sm border border-red-100">
+                    <span id="days" class="timer-number text-3xl md:text-6xl font-bold block">00</span>
+                    <span class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Días</span>
+                </div>
+                <div class="bg-red-50 p-4 rounded-xl min-w-[75px] md:min-w-[120px] shadow-sm border border-red-100">
+                    <span id="hours" class="timer-number text-3xl md:text-6xl font-bold block">00</span>
+                    <span class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Horas</span>
+                </div>
+                <div class="bg-red-50 p-4 rounded-xl min-w-[75px] md:min-w-[120px] shadow-sm border border-red-100">
+                    <span id="minutes" class="timer-number text-3xl md:text-6xl font-bold block">00</span>
+                    <span class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Mins</span>
+                </div>
+                <div class="bg-red-50 p-4 rounded-xl min-w-[75px] md:min-w-[120px] shadow-sm border border-red-100">
+                    <span id="seconds" class="timer-number text-3xl md:text-6xl font-bold block">00</span>
+                    <span class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Segs</span>
+                </div>
+            </div>
+            <p class="mt-6 text-gray-400 italic">...y contando cada segundo de este increíble 2025.</p>
+        </div>
+    </section>
+
+    <!-- El Viaje -->
+    <section id="viaje" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-romance text-red-700 mb-4">Un viaje en el tiempo</h2>
+            <div class="w-24 h-1 bg-red-200 mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center mb-32">
+            <div data-aos="fade-right">
+                <div class="polaroid">
+                    <img src="foto2.jpeg" class="w-full h-80 object-cover" alt="Infancia">
+                    <p class="font-romance text-2xl text-center mt-6 text-gray-700">Donde todo comenzó...</p>
+                </div>
+            </div>
+            <div data-aos="fade-left" class="space-y-6 text-center md:text-left">
+                <h3 class="text-3xl font-serif text-gray-800">Tu esencia pura</h3>
+                <p class="text-gray-600 leading-relaxed text-lg">
+                    Ver esta foto me hace sonreír. Esa niña linda de sueños y de alegría es la misma que hoy veo todos los dias. Siempre has tenido esa luz única que ilumina todo a tu alrededor.
+                </p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE VIDEO AJUSTADA (REACCIÓN 16:9 ADAPTABLE) -->
+        <div class="mb-32 px-2 md:px-0" data-aos="zoom-in">
+            <h3 class="text-center text-3xl font-serif mb-10 text-gray-800 italic">Un recuerdo inolvidable</h3>
+            <!-- aspect-video asegura que el contenedor mantenga la proporción 16:9 -->
+            <div class="video-container aspect-video shadow-2xl mx-auto max-w-5xl">
+                <!-- Usando una imagen como placeholder, pero con object-cover para que llene el espacio -->
+                <img src="https://images.unsplash.com/photo-1516589174184-c68526514ec0?w=1200" class="video-bg" alt="Fondo de video">
+                
+
+
+                <video autoplay muted loop playsinline class="video-bg">
+                    <source src="video1.mp4" type="video/mp4">
+                </video> 
+     
+
+                <div class="video-overlay-text px-4 md:px-12">
+                    <p class="text-base md:text-2xl font-light italic leading-relaxed max-w-3xl">
+                        "Recuerdos....."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center mb-32">
+            <div class="order-2 md:order-1 text-center md:text-left" data-aos="fade-right">
+                <h3 class="text-3xl font-serif text-gray-800">Creciendo y brillando</h3>
+                <p class="text-gray-600 leading-relaxed text-lg">
+                    Cada año, cada experiencia y cada paso te han convertido en la mujer maravillosa que eres hoy. Me siento tan afortunado de haber llegado a tu vida justo a tiempo para compartir este 2025 contigo.
+                </p>
+            </div>
+            <div class="order-1 md:order-2" data-aos="fade-left">
+                <div class="polaroid" style="transform: rotate(3deg);">
+                    <img src="foto1.jpeg" class="w-full h-80 object-cover" alt="Creciendo">
+                    <p class="font-romance text-2xl text-center mt-6 text-gray-700">Tu sonrisa de siempre</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carta Final -->
+    <section class="py-24 bg-red-700 text-white relative">
+        <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+            <span class="text-6xl mb-8 block">💌</span>
+            <h2 class="text-5xl font-romance mb-12">Mi Carta de Navidad</h2>
+            <div class="font-light text-xl space-y-8 text-red-50 leading-loose text-justify italic">
+                <p>Mi amor,</p>
+                <p>Mirar hacia atrás y ver el camino que has recorrido me llena de admiración. Pero lo que más me emociona es pensar en el camino que estamos construyendo nosotros desde aquel mayo.</p>
+                <p>Gracias por ser mi paz, mi alegría y mi aventura favorita en este año que termina. En esta Navidad 2025, celebro que existes y celebro la suerte inmensa de estar a tu lado.</p>
+                <p class="text-right font-romance text-4xl mt-12">Con todo mi amor, por siempre.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-400 bg-gray-50 border-t">
+        <p class="font-serif italic text-lg">"9 de Mayo 2025 • El inicio de lo mejor"</p>
+        <p class="mt-4 text-xs tracking-widest uppercase">Diseñado con todo mi corazón • 2025</p>
+    </footer>
+
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        function createSnow() {
+            const symbols = ['❄', '❅', '❆'];
+            const container = document.body;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            container.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 5000);
+        }
+        setInterval(createSnow, 300);
+
+        const musicBtn = document.getElementById('music-control');
+        const music = document.getElementById('bg-music');
+        const icon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                icon.innerHTML = '🎵';
+            } else {
+                music.play();
+                icon.innerHTML = '⏸️';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        const startDate = new Date("2025-05-09T00:00:00").getTime(); 
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
